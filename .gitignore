@@ -1,1 +1,3 @@
 .ipynb_checkpoints/
+classifier/tf/logs/*
+classifier/__pycache__
