@@ -1,6 +1,6 @@
-package ru.skoltech.genderclassifier
+package ru.skoltech.genderclassifier.classifier
 
-import android.app.Activity
+import android.content.Context
 import android.graphics.Bitmap
 import org.tensorflow.lite.Interpreter
 import java.io.FileInputStream
@@ -8,9 +8,11 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.MappedByteBuffer
 import java.nio.channels.FileChannel
+import javax.inject.Inject
 
 
-class Classifier(activity: Activity) {
+class Classifier
+@Inject constructor(context: Context) {
   private val options = Interpreter.Options()
   private lateinit var interpreter: Interpreter
   private lateinit var imgData: ByteBuffer
@@ -20,10 +22,11 @@ class Classifier(activity: Activity) {
   private val intValues = IntArray(imageWidth * imageHeight)
 
   init {
-    createInterpreter(activity)
+    createInterpreter(context)
     allocateMemoryForImage()
   }
 
+  @Synchronized
   fun classify(bitmap: Bitmap): Pair<Long, Float> {
     convertBitmapToByteBuffer(bitmap)
     val time = measureExecutionTime { interpreter.run(imgData, labelProbArray) }
@@ -35,13 +38,13 @@ class Classifier(activity: Activity) {
     imgData.order(ByteOrder.nativeOrder())
   }
 
-  private fun createInterpreter(activity: Activity) {
-    val model = loadModelFile(activity)
+  private fun createInterpreter(context: Context) {
+    val model = loadModelFile(context)
     interpreter = Interpreter(model, options)
   }
 
-  private fun loadModelFile(activity: Activity): MappedByteBuffer {
-    val fileDescriptor = activity.assets.openFd("model.tflite")
+  private fun loadModelFile(context: Context): MappedByteBuffer {
+    val fileDescriptor = context.assets.openFd("model.tflite")
     val fileChannel = FileInputStream(fileDescriptor.fileDescriptor).channel
     val startOffset = fileDescriptor.startOffset
     val declaredLength = fileDescriptor.declaredLength

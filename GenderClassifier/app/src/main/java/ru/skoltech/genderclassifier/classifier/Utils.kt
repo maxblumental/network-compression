@@ -1,4 +1,4 @@
-package ru.skoltech.genderclassifier
+package ru.skoltech.genderclassifier.classifier
 
 fun measureExecutionTime(work: () -> Unit): Long {
   val start = System.currentTimeMillis()
