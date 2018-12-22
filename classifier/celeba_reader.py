@@ -2,8 +2,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-import tensorflow as tf
-from keras.preprocessing.image import img_to_array, load_img
+from keras_preprocessing.image import img_to_array, load_img
 from tensorflow.python.keras.utils.data_utils import Sequence
 
 
@@ -41,3 +40,14 @@ class CelebaSequence(Sequence):
         x /= 255
         y = (y + 1) / 2
         return x, y
+
+    def __iter__(self):
+        for item in (self[i] for i in range(len(self))):
+            yield item
+
+
+class FiniteCelebaSequence(CelebaSequence):
+
+    def __iter__(self):  # run just one epoch
+        for item in (self[i] for i in range(len(self))):
+            yield item
