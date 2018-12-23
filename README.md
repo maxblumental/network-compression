@@ -44,12 +44,14 @@ Finally, press `START` button in the application. After the process is complete,
 
 #### 3.2 Raspberry Pi  
 Connect to Raspberry Pi via ssh.  
-Upgrade pip and nstall TensorFlow and Keras.  
-```pip install --upgrade pip```  
-```pip install tensorflow```  
-```pip install keras```  
+Upgrade pip and шnstall TensorFlow and Keras.  
+```
+pip install --upgrade pip  
+pip install tensorflow
+pip install keras
+```  
 
-For testing model run ```rpi_test.py```. In this file you should specify a path to dataset and saved model and choose a name of output csv-file.  
+For testing model run `rpi_test.py`. In this file you should specify a path to dataset and saved model and choose a name of output csv-file.  
 
-For getting results run ```results.py```. In this file you should specify a path to csv-file mentioned above and to ```list_attr_celeba.csv```.  
+For getting results run `results.py`. In this file you should specify a path to csv-file mentioned above and to `list_attr_celeba.csv`.  
 This script prints ROC AUC score of the model, mean of classification time and standard deviation of this time.
