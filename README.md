@@ -41,3 +41,17 @@ Run the server in the same directory as `img_align_celeba/` (the directory with 
 $ adb reverse tcp:8000 tcp:8000
 ```
 Finally, press `START` button in the application. After the process is complete, you can find a `celeba_test.csv` file with resutls in the phone's `Document/` folder.
+
+#### 3.2 Raspberry Pi  
+Connect to Raspberry Pi via ssh.  
+Upgrade pip and шnstall TensorFlow and Keras.  
+```
+pip install --upgrade pip  
+pip install tensorflow
+pip install keras
+```  
+
+For testing model run `rpi_test.py`. In this file you should specify a path to dataset and saved model and choose a name of output csv-file.  
+
+For getting results run `results.py`. In this file you should specify a path to csv-file mentioned above and to `list_attr_celeba.csv`.  
+This script prints ROC AUC score of the model, mean of classification time and standard deviation of this time.
