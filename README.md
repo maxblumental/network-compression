@@ -44,7 +44,7 @@ Finally, press `START` button in the application. After the process is complete,
 
 #### 3.2 Raspberry Pi  
 Connect to Raspberry Pi via ssh.  
-Upgrade pip and шnstall TensorFlow and Keras.  
+Upgrade pip and install TensorFlow and Keras.  
 ```
 pip install --upgrade pip  
 pip install tensorflow
